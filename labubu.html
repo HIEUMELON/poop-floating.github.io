@@ -18,6 +18,7 @@
     .wrapper {
       width: 100%;
       max-width: 900px;
+      /* Nếu video đứng thì cho 9/16, còn ngang thì 16/9 */
       aspect-ratio: 16 / 9;
     }
 
@@ -34,13 +35,24 @@
 <body>
   <div class="wrapper">
     <video
-      src="labubu.mp4"   <!-- NHỚ: tên này phải trùng với file mp4 mày up -->
+      id="labubuVideo"
       controls
       autoplay
       loop
       muted
       playsinline
-    ></video>
+    >
+      <source src="labubu.mp4" type="video/mp4" />
+      Trình duyệt của bạn không hỗ trợ video.
+    </video>
   </div>
+
+  <script>
+    // cố gắng autoplay, nếu bị chặn thì vẫn còn nút play trong controls
+    const v = document.getElementById('labubuVideo');
+    v.play().catch(e => {
+      console.log('Autoplay bị chặn, bấm nút Play để chạy.', e);
+    });
+  </script>
 </body>
 </html>
