@@ -15,44 +15,38 @@
       font-family: sans-serif;
     }
 
-    .wrapper {
-      width: 100%;
-      max-width: 900px;
-      /* Nếu video đứng thì cho 9/16, còn ngang thì 16/9 */
-      aspect-ratio: 16 / 9;
-    }
-
     video {
-      width: 100%;
-      height: 100%;
+      max-width: 90vw;
+      max-height: 90vh;
       border-radius: 16px;
-      outline: none;
-      display: block;
       background: #000;
+      display: block;
     }
   </style>
 </head>
 <body>
-  <div class="wrapper">
-    <video
-      id="labubuVideo"
-      controls
-      autoplay
-      loop
-      muted
-      playsinline
-    >
-      <source src="labubu.mp4" type="video/mp4" />
-      Trình duyệt của bạn không hỗ trợ video.
-    </video>
-  </div>
+  <video
+    id="labubuVideo"
+    controls
+    autoplay
+    loop
+    muted
+    playsinline
+  >
+    <source src="labubu.mp4" type="video/mp4" />
+    Trình duyệt của bạn không hỗ trợ video.
+  </video>
 
   <script>
-    // cố gắng autoplay, nếu bị chặn thì vẫn còn nút play trong controls
     const v = document.getElementById('labubuVideo');
-    v.play().catch(e => {
-      console.log('Autoplay bị chặn, bấm nút Play để chạy.', e);
-    });
+    // đảm bảo muted để trình duyệt cho autoplay
+    v.muted = true;
+    const p = v.play();
+    if (p && p.catch) {
+      p.catch(err => {
+        console.log('Autoplay bị chặn, bấm nút Play để chạy.', err);
+      });
+    }
   </script>
 </body>
 </html>
